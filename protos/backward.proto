@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.backward.service";
+option java_outer_classname = "BackwardService";
+option objc_class_prefix = "HLW";
+
+package backward;
+
+service Backward {
+    rpc BackwardMessage (BackwardRequest) returns (BackwardResponse) {}
+}
+
+message BackwardRequest {
+    string session = 1;
+    string service = 2;
+    string method = 3;
+    string params = 4;
+}
+
+message  BackwardResponse {
+    optional int32 code = 1;
+    optional string message = 2;
+    optional string body = 3;
+}

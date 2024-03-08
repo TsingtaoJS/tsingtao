@@ -1,0 +1,42 @@
+{
+    "name": "tsingtao",
+    "version": "0.0.1",
+    "description": "",
+    "main": "./lib/index.js",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "types": "./types/index.d.ts",
+    "files": [
+        "lib",
+        "types",
+        "protos"
+    ],
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TsingtaoJS/tsingtao.git"
+    },
+    "bugs": {
+        "url": "https://github.com/TsingtaoJS/tsingtao/issues"
+    },
+    "homepage": "https://github.com/TsingtaoJS/tsingtao#readme",
+    "devDependencies": {
+        "@types/crc": "^3.8.3",
+        "@types/ioredis": "^5.0.0",
+        "@types/lodash": "^4.14.202",
+        "@types/node": "^20.10.8",
+        "@types/uuid": "^9.0.7",
+        "jest": "^29.7.0"
+    },
+    "dependencies": {
+        "@grpc/grpc-js": "^1.9.13",
+        "@grpc/proto-loader": "^0.7.10",
+        "crc": "^4.3.2",
+        "ioredis": "^5.3.2",
+        "lodash": "^4.17.21",
+        "log4js": "^6.9.1",
+        "uuid": "^9.0.1",
+        "yargs-parser": "^21.1.1"
+    }
+}

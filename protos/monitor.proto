@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.monitor.service";
+option java_outer_classname = "MonitorService";
+option objc_class_prefix = "HLW";
+
+package monitor;
+
+
+service Monitor {
+    rpc GetState(StateRequest) returns (StateReply) {}
+}
+
+message StateRequest {
+    string from = 1;
+}
+
+message StateReply {
+    string id = 1;
+    int32 memory = 2;
+    int32 free = 3;
+    repeated int32 loadavg = 4;
+}

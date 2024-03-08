@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.session.service";
+option java_outer_classname = "SessionService";
+option objc_class_prefix = "HLW";
+
+package session;
+
+service Session {
+    rpc PushMessage(PushMessageRequest) returns (PushMessageResponse) {}
+    rpc Broadcast(BroadcastRequest) returns (stream BroadcastResponse) {}
+    rpc SetCookie(SetCookieRequest) returns (SetCookieResponse) {}
+    rpc Close(CloseRequest) returns (CloseResponse) {}
+}
+
+message PushMessageRequest {
+    repeated string ids = 1;
+    string event = 2;
+    string message = 3;
+}
+
+message PushMessageResponse {
+    repeated string failed = 1;
+}
+
+message BroadcastRequest {
+    string event = 1;
+    string message = 2;
+    message BroadcastRequestOption {
+        optional bool bined = 1;
+        optional int32 batch = 2;
+    }
+    optional BroadcastRequestOption opts = 3;
+}
+
+message BroadcastResponse {
+    int32 success = 1;
+}
+
+message SetCookieRequest {
+    string id = 1;
+    string key = 2;
+    string value = 3;
+    int32 expires = 4;
+}
+
+message SetCookieResponse {
+    int32 success = 1;
+}
+
+message CloseRequest {
+    string id = 1;
+    int32 code = 2;
+    optional string reason = 3;
+}
+
+message CloseResponse {
+    int32 success = 1;
+}
