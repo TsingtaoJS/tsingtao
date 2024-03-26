@@ -14,6 +14,8 @@ export declare interface Session {
     readonly frontend: string
     readonly headers: { [ids: string]: any }
 
+    bind(uid: string): Session
+
     sync(): Promise<Session>
     save(keys?: string[]): Promise<'OK' | undefined>
 
