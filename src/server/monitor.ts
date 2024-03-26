@@ -33,7 +33,7 @@ export class MonitorServer extends Server {
             if (!server.monitor) {
                 const uri = `${server.hostname}:${server.port}`
                 const monitor = new PROTOS.monitor.Monitor(uri, grpc.credentials.createInsecure())
-                Object.defineProperty(server, 'monitor', { value: monitor, enumerable: false })
+                Object.defineProperty(server, 'monitor', { value: monitor, enumerable: false, configurable: true })
                 logger.debug('connect to ', { uri })
             }
             if (server.monitor) {

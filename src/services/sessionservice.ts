@@ -76,6 +76,7 @@ export default class SessionService extends EventEmitter {
             Object.defineProperty(frontend, 'session', {
                 value: new PROTOS.session.Session(`${frontend.hostname}:${frontend.port}`, credentials.createInsecure()),
                 enumerable: false,
+                configurable: true
             })
         }
         return frontend.session

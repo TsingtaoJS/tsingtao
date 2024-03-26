@@ -57,7 +57,7 @@ export default class Master extends EventEmitter {
     }
 
     add(node: ServerInfo) {
-        Object.defineProperty(node, 'hash', { value: hash_number(node.id), enumerable: false })
+        Object.defineProperty(node, 'hash', { value: hash_number(node.id), enumerable: false, configurable: true })
         if (!this.serverTypes[node.type]) {
             this.serverTypes[node.type] = {}
         }

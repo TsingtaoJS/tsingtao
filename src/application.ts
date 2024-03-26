@@ -61,7 +61,7 @@ export class Application {
             host: getLocalIPAddresses()[0],
             hostname: hostname(),
             port: this.server.port,
-            alive: this.alive,
+            alive: this.alive
         } as ServerInfo
     }
 
@@ -105,7 +105,7 @@ export class Application {
                 const server = servers[id] as BackwardServerInfo
                 if (!server.backward) {
                     const backward = new PROTOS.backward.Backward(`${server.hostname}:${server.port}`, credentials.createInsecure())
-                    Object.defineProperty(server, 'backward', { value: backward, enumerable: false })
+                    Object.defineProperty(server, 'backward', { value: backward, enumerable: false, configurable: true })
                     logger.debug('create backward connection', { server })
                 }
                 if (server.backward) {

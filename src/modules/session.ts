@@ -90,6 +90,11 @@ export class Session extends EventEmitter {
         return this._settings[key]
     }
 
+    bind(uid: string) {
+        this._settings.uid = uid
+        return this
+    }
+
     async kickout(reason: string) {
         return await this.close(2000, reason)
     }
@@ -109,6 +114,7 @@ export class Session extends EventEmitter {
         return await new Promise((resolve) => {
             client.Close({ id: this.id, code, reason }, (err: Error, response: { success: boolean }) => {
                 if (err) {
+                    logger.warn('session close failed', { id: this.id, code, reason, message: err.message })
                     this.app.sessionService.remRemoteRpcClient(this.frontend)
                     return false
                 }
