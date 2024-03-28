@@ -105,14 +105,14 @@ export class Session extends EventEmitter {
             return
         }
 
-        const client = this.app.sessionService.getRemoteRpcClient(this.frontend)
-        if (!client) {
+        const frontend = this.app.sessionService.getRemoteRpcClient(this.frontend)
+        if (!frontend) {
             logger.debug('ignore session close without client', { code, reason })
             return
         }
 
         return await new Promise((resolve) => {
-            client.Close({ id: this.id, code, reason }, (err: Error, response: { success: boolean }) => {
+            frontend.Close({ id: this.id, code, reason }, (err: Error, response: { success: boolean }) => {
                 if (err) {
                     logger.warn('session close failed', { id: this.id, code, reason, message: err.message })
                     this.app.sessionService.remRemoteRpcClient(this.frontend)
@@ -126,10 +126,10 @@ export class Session extends EventEmitter {
     async setCookie(key: string, value: string, expires: number) {
         if (!this.id) return
 
-        const client = this.app.sessionService.getRemoteRpcClient(this.frontend)
-        if (!client) return
+        const frontend = this.app.sessionService.getRemoteRpcClient(this.frontend)
+        if (!frontend) return
         return await new Promise((resolve) => {
-            client.SetCookie({ id: this.id, key, value, expires }, (err: Error, response: { success: boolean }) => {
+            frontend.SetCookie({ id: this.id, key, value, expires }, (err: Error, response: { success: boolean }) => {
                 if (err) {
                     this.app.sessionService.remRemoteRpcClient(this.frontend)
                     return false
@@ -142,11 +142,11 @@ export class Session extends EventEmitter {
     async pushMessage(event: string, body: any) {
         if (!this.id) return
 
-        const client = this.app.sessionService.getRemoteRpcClient(this.frontend)
-        if (!client) return
+        const frontend = this.app.sessionService.getRemoteRpcClient(this.frontend)
+        if (!frontend) return
 
         return await new Promise((resolve, reject) => {
-            client.PushMessage(
+            frontend.PushMessage(
                 { ids: [this.id], event, message: typeof body === 'object' ? JSON.stringify(body) : body.toString() },
                 (err: Error, response: { failed: string[] }) => {
                     if (err) {

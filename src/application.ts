@@ -35,6 +35,8 @@ export class Application {
 
     server: Server
     master: Master = new Master(process.env.TSINGTAO_MASTER || 'redis://localhost:6379')
+
+    contents: Map<string, any> = new Map()
     constructor(opts: { version: string }) {
         this.version = opts.version
 
@@ -77,6 +79,14 @@ export class Application {
 
     route(type: string, fn: (session: Session, msg: any, servers: ServerInfo[]) => Promise<string | void>) {
         this.routes.set(type, fn)
+    }
+
+    set(key: string, value: any) {
+        this.contents.set(key, value)
+    }
+
+    get<T>(key: string): T | undefined {
+        return this.contents.get(key) as T
     }
 
     async handMessage(id: string, service: string, method: string, params: any) {

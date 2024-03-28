@@ -59,6 +59,9 @@ export declare interface Application {
     alive: number
     readonly curServer: ServerInfo
 
+    set(key: string, value: any): void
+    get<T>(key: string): T | undefined
+
     start(): void
     route(
         type: string,
