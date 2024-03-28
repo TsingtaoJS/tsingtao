@@ -120,6 +120,7 @@ export declare const ARGS: {
 }
 
 declare namespace Tsingtao {
+    const app: Application
     export function createApp(opts: { version: string }): Application
 }
 

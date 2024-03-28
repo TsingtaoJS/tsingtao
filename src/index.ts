@@ -6,8 +6,10 @@ export { MonitorServer } from './server/monitor'
 export { ARGS } from './utils/constants'
 
 namespace Tsingtao {
+    export let app: Application
     export function createApp(opts: { version: string }) {
-        return new Application(opts)
+        if (!app) app = new Application(opts)
+        return app
     }
 }
 
